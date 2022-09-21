@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,6 +27,8 @@ public class Place implements Serializable{
 	private Long id;
 	private int numero;
 	private boolean reserved = false ;
+	
+	@JsonIgnore
 	@ManyToOne
 	private Salle salle;
 

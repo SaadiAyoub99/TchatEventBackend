@@ -17,7 +17,7 @@ public class SalleService {
 	public SalleRepository salleRepository;
 	
 	
-	public List<Salle> findAllSalle(){
+	public List<Salle> findAllSalleByName(){
 		return salleRepository.findAll();
 	}
 }

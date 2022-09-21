@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
@@ -25,9 +26,10 @@ public class Categorie implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	private String name;
 	
-	@JsonProperty(access = Access.WRITE_ONLY)
+	@JsonIgnore
 	@OneToMany(mappedBy = "categorie")
 	private List<DemandeEvent> demandeEvents;
 }

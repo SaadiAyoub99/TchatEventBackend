@@ -45,7 +45,7 @@ public class DemandeEventController {
 		return demandeService.findById(id);
 	}
 	
-	
+	/*
 	@PostMapping(value = {"/createDemande"}, consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
 	@PreAuthorize("hasRole('User')")
 	public DemandeEvent addDemande (@RequestPart("demandeEvent") DemandeEvent demandeEvent, @RequestPart ("imageFile") MultipartFile[] file , @RequestParam Long id) {
@@ -59,6 +59,12 @@ public class DemandeEventController {
 		}
 		
 		
+	}*/
+	
+	@PostMapping("/createDemande")
+	@PreAuthorize("hasRole('User')")
+	public DemandeEvent addDemande (@RequestBody DemandeEvent demandeEvent, @RequestParam Long id) {
+		return demandeService.addEvent(demandeEvent, id);
 	}
 	
 	public Set<ImageModel> uploadImage(MultipartFile[] multipartFiles) throws IOException{

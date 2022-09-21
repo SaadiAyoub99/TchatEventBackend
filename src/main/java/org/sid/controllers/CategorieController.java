@@ -18,7 +18,6 @@ public class CategorieController {
 	
 	
 	@GetMapping("/AllCategorie")
-	@PreAuthorize("hasRole('User')")
 	public List<Categorie> findAllCategorie(){
 		return categorieService.findAllCategorie();
 	}

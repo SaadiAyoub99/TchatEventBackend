@@ -20,8 +20,7 @@ public class SalleController {
 	
 	
 	@GetMapping("/AllSalle")
-	@PreAuthorize("hasRole('User')")
 	public List<Salle> findAllSalle(){
-		return salleService.findAllSalle();
+		return salleService.findAllSalleByName();
 	}
 }

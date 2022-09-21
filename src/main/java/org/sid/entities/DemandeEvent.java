@@ -63,6 +63,7 @@ public class DemandeEvent implements Serializable {
 	@ManyToOne
 	private Categorie categorie;
 	
+	@JsonIgnore
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "Events_Image",
 	joinColumns = {
