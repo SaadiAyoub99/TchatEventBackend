@@ -21,11 +21,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.ManyToAny;
 import org.sid.enums.Etat;
 import org.springframework.beans.factory.annotation.Value;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
@@ -42,9 +45,11 @@ public class DemandeEvent implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String titre;
+	@Column(length = 5000)
 	private String description;
 	private int prixPlace;
 	private String heureDebut;
+	@Temporal(TemporalType.DATE)
 	private Date dateOrganisation;
 	
 	@Column(length = 32, columnDefinition = "varchar(32) default 'PENDING'")
@@ -57,13 +62,13 @@ public class DemandeEvent implements Serializable {
 	private Salle salle;
 	
 	@ManyToOne
-	@JoinColumn(name = "idUser", nullable=false)
+	@JoinColumn(name = "idUser", referencedColumnName = "id")
 	private IUser user;
 	
 	@ManyToOne
 	private Categorie categorie;
 	
-	@JsonIgnore
+	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "Events_Image",
 	joinColumns = {

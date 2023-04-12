@@ -20,4 +20,8 @@ public class SalleService {
 	public List<Salle> findAllSalleByName(){
 		return salleRepository.findAll();
 	}
+	
+	public Salle findSalleById(Long id) {
+		return salleRepository.findById(id).get();
+	}
 }

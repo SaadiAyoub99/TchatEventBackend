@@ -5,11 +5,16 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.sid.entities.Categorie;
 import org.sid.entities.DemandeEvent;
 import org.sid.entities.IUser;
 import org.sid.entities.ImageModel;
+import org.sid.entities.Salle;
+import org.sid.repositories.DemandeEventRepository;
 import org.sid.repositories.UserRepository;
+import org.sid.services.CategorieService;
 import org.sid.services.DemandeService;
+import org.sid.services.SalleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -32,6 +37,15 @@ public class DemandeEventController {
 	public DemandeService demandeService;
 	
 	@Autowired
+	public DemandeEventRepository demandeEventRepository;
+	
+	@Autowired
+	public SalleService salleService;
+	
+	@Autowired
+	public CategorieService categorieService;
+	
+	@Autowired
 	public UserRepository userRepository;
 	
 	
@@ -45,27 +59,25 @@ public class DemandeEventController {
 		return demandeService.findById(id);
 	}
 	
-	/*
-	@PostMapping(value = {"/createDemande"}, consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+	
 	@PreAuthorize("hasRole('User')")
-	public DemandeEvent addDemande (@RequestPart("demandeEvent") DemandeEvent demandeEvent, @RequestPart ("imageFile") MultipartFile[] file , @RequestParam Long id) {
+	@PostMapping(value = {"/createDemande/{idSalle}/{idCategorie}"}, consumes = {MediaType.MULTIPART_FORM_DATA_VALUE	})
+	public DemandeEvent addDemande (@RequestPart("demandeEvent") DemandeEvent demandeEvent, @RequestPart("imageFile") MultipartFile[] file , @RequestParam Long id, @PathVariable Long idSalle, @PathVariable Long idCategorie ) {
+		//return demandeService.addEvent(demandeEvent, id, idSalle, idCategorie);
 		try {
 			Set<ImageModel> images = uploadImage(file);
 			demandeEvent.setEventImage(images);
-			return demandeService.addEvent(demandeEvent, id);
-		} catch (Exception e) {
+			return demandeService.addEvent(demandeEvent, id, idSalle, idCategorie);
+		}catch (Exception e) {
 			System.out.println(e.getMessage());
 			return null;
 		}
-		
-		
-	}*/
-	
-	@PostMapping("/createDemande")
-	@PreAuthorize("hasRole('User')")
-	public DemandeEvent addDemande (@RequestBody DemandeEvent demandeEvent, @RequestParam Long id) {
-		return demandeService.addEvent(demandeEvent, id);
 	}
+	
+	
+	
+	
+	
 	
 	public Set<ImageModel> uploadImage(MultipartFile[] multipartFiles) throws IOException{
 		Set<ImageModel> imageModels = new HashSet<>();
@@ -82,10 +94,15 @@ public class DemandeEventController {
 	}
 	
 	
+	
 	@DeleteMapping("/SupprimerEvent")
-	@PreAuthorize("hasRole('User')")
 	public void deleteEleve(@RequestParam Long id) {
 		demandeService.deleteEvent(id);
+	}
+	
+	@GetMapping("/getDemandeDetailsById/{id}")
+	public DemandeEvent getDemandeDetailsById(@PathVariable Long id) {
+		return demandeService.getDemandeDetailsById(id);
 	}
 	
 	
@@ -101,36 +118,38 @@ public class DemandeEventController {
 		demandeService.RefusedDemande(id);
 	}
 	
-	
 	@GetMapping("/AllPending")
 	@PreAuthorize("hasRole('Admin')")
 	public List<DemandeEvent> getAllPendingDemandes(){
 		return demandeService.getAllPendingDemandes();
 	}
-	/*
-	@GetMapping("/PublishedEvents")
-	public List<DemandeEvent> getAllAcceptedDemandes(){
-		return demandeService.getAllAcceptedDemandes();
-	}
-
-	@GetMapping("/UserAccepted/{id}")
+	
+	@GetMapping("/MyPending/{id}")
 	@PreAuthorize("hasRole('User')")
-	public List<DemandeEvent> getAcceptedEventByUserId(@PathVariable Long id ){
-    	return demandeService.getAcceptedEventByUserId(id);
+	public List<DemandeEvent> getPendingDemandeByUserId(@PathVariable Long id){
+		return demandeService.getPendingDemandeByUserId(id);
 	}
 	
-	@GetMapping("/UserPending/{id}")
+	@GetMapping("/MyAccepted/{id}")
 	@PreAuthorize("hasRole('User')")
-	public List<DemandeEvent> getPendingEventByUserId(@PathVariable Long id ){
-    	return demandeService.getPendingEventByUserId(id);
+	public List<DemandeEvent> getAcceptedDemandeByUserId(@PathVariable Long id ){
+    	return demandeService.getAcceptedDemandeByUserId(id);
 	}
 	
-	@GetMapping("/UserRefused/{id}")
+	@GetMapping("/MyRefused/{id}")
 	@PreAuthorize("hasRole('User')")
 	public List<DemandeEvent> getRefusedEventByUserId(@PathVariable Long id ){
     	return demandeService.getRefusedEventByUserId(id);
 	}
-	*/
+	
+	
+
+	
+	@GetMapping("/PublishedEvents")
+	public List<DemandeEvent> getAllAcceptedDemandes(){
+		return demandeService.getAllAcceptedDemandes();
+	}
+	
 }
 
 

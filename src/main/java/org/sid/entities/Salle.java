@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,18 +30,17 @@ public class Salle implements Serializable{
 
 	private String name;
 	
-	@JsonIgnore
 	private int nbrPlace;
 
 	@JsonIgnore
 	@ManyToOne
 	private Centre centre;
 	
-	@JsonIgnore
+
 	@OneToMany(mappedBy = "salle")
 	private List<Place> places;
 	
-	@JsonIgnore
+	@JsonIgnoreProperties({ "salle" })
 	@OneToOne(mappedBy = "salle")
 	private DemandeEvent demandeEvent;
 }

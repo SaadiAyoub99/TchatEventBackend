@@ -17,41 +17,43 @@ public class ITestController {
 	@Autowired
 	public UserService userService;
 	
-	/*
-	@PostConstruct
-	public void initRoleUsers() {
-		userService.initRoleUsers();
-	}
-	
-	@PostConstruct
-	public void initVille() {
-		iTestService.initVille();
-	}
-	
-	
-	@PostConstruct
-	public void initCentre() {
-		iTestService.initCentre();
-	}
-	
-	
-	@PostConstruct
-	public void initSalle() {
-		iTestService.initSalle();
-	}
-	
-	
-	@PostConstruct
-	public void initPlace() {
-		iTestService.initPlace();
-	}
-	
-	
-	@PostConstruct
-	public void initCategorie() {
-		iTestService.initCategorie();
-	}
-	*/
+//
+//	@PostConstruct
+//	public void initRoleUsers() {
+//		userService.initRoleUsers();
+//	}
+//
+//	@PostConstruct
+//	public void initVille() {
+//		iTestService.initVille();
+//	}
+//
+//
+//	@PostConstruct
+//	public void initCentre() {
+//		iTestService.initCentre();
+//	}
+//
+//
+//
+//	@PostConstruct
+//	public void initSalle() {
+//		iTestService.initSalle();
+//	}
+//
+//
+//
+//	@PostConstruct
+//	public void initPlace() {
+//		iTestService.initPlace();
+//	}
+//
+//
+//	@PostConstruct
+//	public void initCategorie() {
+//		iTestService.initCategorie();
+//	}
+
 	
 	
 }

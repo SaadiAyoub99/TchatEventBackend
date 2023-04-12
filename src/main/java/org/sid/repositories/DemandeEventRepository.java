@@ -16,22 +16,18 @@ public interface DemandeEventRepository extends JpaRepository<DemandeEvent, Long
 	
 	@Query("select d from DemandeEvent d where d.status like 'PENDING'")
 	public List<DemandeEvent> getAllPendingDemandes();
-	/*
+	
+	@Query("select d from DemandeEvent d where d.user.id = :id and  d.status like 'PENDING' ")
+	public List<DemandeEvent> getPendingDemandeByUserId(@Param("id") Long id );
+	
+	@Query("select d from DemandeEvent d where d.user.id = :id and  d.status like 'ACCEPTED' ")
+	public List<DemandeEvent> getAcceptedDemandeByUserId(Long id );
+
+	@Query("select d from DemandeEvent d where d.user.id = :id and  d.status like 'REFUSED' ")
+	public List<DemandeEvent> getRefusedDemandeByUserId(Long id );
+	
+	
 	@Query("select d from DemandeEvent d where d.status like 'ACCEPTED'")
 	public List<DemandeEvent> getAllAcceptedDemandes();
 	
-	@Query("select d from demande_event d where d.iuser.id = :id_user and d.status like 'ACCEPTED' ")
-	public List<DemandeEvent> getAcceptedEventByUserId(Long id );
-
-	@Query("select d from demande_event d where d.iuser.id = :id_user and d.status like 'REFUSED' ")
-	public List<DemandeEvent> getRefusedEventByUserId(Long id );
-	
-	@Query("select d from demande_event d where d.iuser.id = :id_user and d.status like 'PENDING' ")
-	public List<DemandeEvent> getPendingEventByUserId(Long id );
-	
-	
-	@Modifying
-	@Query("delete from demande_event d where d.id=:id")
-	void deleteAcceptedDemande(@Param("id") Long id);
-	*/
 }

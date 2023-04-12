@@ -26,12 +26,12 @@ public class UserController {
 	@Autowired
 	public IUserRepository iUserRepository;
 	
-	/*
-	@PostConstruct
-	public void initRoleUsers() {
-		userService.initRoleUsers();
-	}
-	*/
+
+//	@PostConstruct
+//	public void initRoleUsers() {
+//		userService.initRoleUsers();
+//	}
+
 	
 	@GetMapping("/users")
 	public List<IUser> getAllUsers() {

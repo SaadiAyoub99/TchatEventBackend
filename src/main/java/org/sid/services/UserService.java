@@ -47,13 +47,22 @@ public class UserService {
 		userRepository.save(admin);
 		
 
-		IUser user = new IUser();
-		user.setUserFirstName("utilisateur");
-		user.setUserLastName("Tchat");
-		user.setUserName("user@tchat.it");
-		user.setUserPassword(getEncoderPassword("@1234"));
-		user.setRole(userRole);
-		userRepository.save(user);
+		IUser user1 = new IUser();
+		user1.setUserFirstName("Saadi");
+		user1.setUserLastName("Ayoub");
+		user1.setUserName("saadi@gmail.com");
+		user1.setUserPassword(getEncoderPassword("@1234"));
+		user1.setRole(userRole);
+		userRepository.save(user1);
+		
+		IUser user2 = new IUser();
+		user2.setUserFirstName("Tahiri");
+		user2.setUserLastName("Mohammed");
+		user2.setUserName("Tahiri@gmail.com");
+		user2.setUserPassword(getEncoderPassword("@1234"));
+		user2.setRole(userRole);
+		userRepository.save(user2);
+		
 		
 	}
 	

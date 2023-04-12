@@ -51,5 +51,9 @@ public class IUser implements Serializable {
 	@JsonProperty(access = Access.WRITE_ONLY)
 	@OneToMany(mappedBy = "user")
 	private List<DemandeEvent> demandeEvents;
+	
+	@JsonProperty(access = Access.WRITE_ONLY)
+	@OneToMany(mappedBy = "user")
+	private List<Place> places;
 
 }
